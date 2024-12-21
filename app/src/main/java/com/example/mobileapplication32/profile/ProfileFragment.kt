@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
@@ -21,13 +22,16 @@ import com.google.android.material.tabs.TabLayoutMediator
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
-    private lateinit var vpAdapter: VpAdapter
     private lateinit var rvAdapter: RvStoryAdapter
+    private lateinit var vpAdapter: VpAdapter
 
-    private val tList = listOf("Posts","Tagged")
     private val fList = listOf(
         PostsFragment.newInstance(),
         TaggedFragment.newInstance()
+    )
+
+    private val tList = listOf(
+        "POSTS", "TAGGED"
     )
 
     override fun onCreateView(
@@ -40,7 +44,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vpInit()
+        initVP()
         rvInit()
     }
 
@@ -59,13 +63,17 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun vpInit() = with(binding){
-        vpAdapter = VpAdapter(requireActivity(),fList)
-        vpProfile.adapter = vpAdapter
-        TabLayoutMediator(tabLayout, vpProfile) { tab, position ->
+    private fun initVP() = with(binding){
+        vpAdapter = VpAdapter(activity as FragmentActivity, fList)
+        //        vpAdapter = VpAdapter(requireActivity(),fList) ესეც მისაღებია
+        vp.adapter = vpAdapter
+        TabLayoutMediator(tabLayout, vp) { tab, position ->
+//            tab.text = "tab ${position + 1}"
             tab.text = tList[position]
         }.attach()
     }
+
+
 
     companion object {
         @JvmStatic

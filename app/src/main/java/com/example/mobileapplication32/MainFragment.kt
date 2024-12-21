@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.mobileapplication32.databinding.FragmentMainBinding
 import com.example.mobileapplication32.home.HomeFragment
+import com.example.mobileapplication32.home.homeFragments.HomeMainFragment
 import com.example.mobileapplication32.profile.ProfileFragment
 
 class MainFragment : Fragment() {
@@ -28,11 +29,11 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        loadFragment(HomeFragment.newInstance())
+        loadFragment(HomeMainFragment.newInstance())
         bottomNavMenu.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> {
-                    loadFragment(HomeFragment.newInstance())
+                    loadFragment(HomeMainFragment.newInstance())
                     true
                 }
                 R.id.search -> {
@@ -52,7 +53,7 @@ class MainFragment : Fragment() {
                     true
                 }
                 else -> {
-                    loadFragment(HomeFragment.newInstance())
+                    loadFragment(HomeMainFragment.newInstance())
                     true
                 }
             }
